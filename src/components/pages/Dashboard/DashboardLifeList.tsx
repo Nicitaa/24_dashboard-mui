@@ -1,4 +1,4 @@
-import { Box, Card, IconTypeMap, Stack, Typography } from "@mui/material"
+import { Box, Card, Stack, Typography } from "@mui/material"
 
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet"
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1"

@@ -11,7 +11,7 @@ export function HomePage() {
     return null
   }
 
-  const CustomButton = styled(Button)(({}) => ({
+  const CustomButton = styled(Button)(() => ({
     backgroundColor: "transparent",
     color: "#f9f9f9",
     padding: "10px 20px",

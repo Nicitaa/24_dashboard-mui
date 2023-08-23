@@ -27,15 +27,15 @@ export function DashboardCharts() {
     const { left, top, width, height } = useDrawingArea()
 
     // Get the two scale
-    const leftAxisScale = useYScale("left_axis_id") as ScaleLinear<any, any>
-    const rightAxisScale = useYScale("right_axis_id") as ScaleLinear<any, any>
+const leftAxisScale = useYScale("left_axis_id") as ScaleLinear<number, number>;
+const rightAxisScale = useYScale("right_axis_id") as ScaleLinear<number, number>;
 
     const [mouseY, setMouseY] = useState<null | number>(null)
 
     useEffect(() => {
       const element = svgRef.current
       if (element === null) {
-        return () => {}
+        return 
       }
 
       const handleMouseOut = () => {

@@ -93,11 +93,7 @@ export function Navbar() {
     <AppBar
       position="static"
       sx={{ backgroundColor: "transparent", boxShadow: "none" }}
-      style={
-        true
-          ? { backgroundColor: "hsl(var(--background))", color: "hsl(var(--foreground))" }
-          : { backgroundColor: "hsl(var(--foreground))", color: "hsl(var(--title))" }
-      }>
+      style={{ backgroundColor: "hsl(var(--background))", color: "hsl(var(--foreground))" }}>
       <Toolbar sx={{ justifyContent: "space-around" }}>
         <Box
           sx={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "row" }}
