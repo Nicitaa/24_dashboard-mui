@@ -1,5 +1,5 @@
 /*
-To use this hook paste code below where you want use slider into parameters
+To use this hook paste code below into parameters where you want use slider 
 e.g <div onMouseDown={onMouseTouchDown} ...></div>
         onMouseDown={handleMouseDown}
         onTouchStart={handleMouseMove}
@@ -8,65 +8,65 @@ e.g <div onMouseDown={onMouseTouchDown} ...></div>
         ref={wrapperRef} //if you need center it
 */
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react"
 
 export function useSlider() {
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const [isDown, setDown] = useState(false);
-  const [startX, setX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const [isDown, setDown] = useState(false)
+  const [startX, setX] = useState(0)
+  const [scrollLeft, setScrollLeft] = useState(0)
   useEffect(() => {
     if (wrapperRef.current) {
-      const width = wrapperRef.current.scrollWidth;
-      const diff = width - document.body.clientWidth;
+      const width = wrapperRef.current.scrollWidth
+      const diff = width - document.body.clientWidth
 
-      if (diff < 0) return;
-      wrapperRef.current.scrollLeft = diff / 2;
+      if (diff < 0) return
+      wrapperRef.current.scrollLeft = diff / 2
     }
-  }, []);
+  }, [])
 
   function handleMouseDown(e: React.MouseEvent<HTMLDivElement>) {
-    setDown(true);
-    setX(e.pageX - e.currentTarget.offsetLeft);
-    setScrollLeft(e.currentTarget.scrollLeft);
+    setDown(true)
+    setX(e.pageX - e.currentTarget.offsetLeft)
+    setScrollLeft(e.currentTarget.scrollLeft)
   }
   function handleTouchDown(e: React.TouchEvent<HTMLDivElement>) {
-    setDown(true);
-    setX(e.changedTouches[0].pageX - e.currentTarget.offsetLeft);
-    setScrollLeft(e.currentTarget.scrollLeft);
+    setDown(true)
+    setX(e.changedTouches[0].pageX - e.currentTarget.offsetLeft)
+    setScrollLeft(e.currentTarget.scrollLeft)
   }
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    if (!isDown) return;
-    const x = e.pageX - e.currentTarget.offsetLeft;
-    const speed = 1;
-    const walk = (x - startX) * speed;
-    e.currentTarget.scrollLeft = scrollLeft - walk;
+    if (!isDown) return
+    const x = e.pageX - e.currentTarget.offsetLeft
+    const speed = 1
+    const walk = (x - startX) * speed
+    e.currentTarget.scrollLeft = scrollLeft - walk
   }
   function handleTouchMove(e: React.TouchEvent<HTMLDivElement>) {
-    if (!isDown) return;
-    const x = e.changedTouches[0].pageX - e.currentTarget.offsetLeft;
-    const speed = 1;
-    const walk = (x - startX) * speed;
-    e.currentTarget.scrollLeft = scrollLeft - walk;
+    if (!isDown) return
+    const x = e.changedTouches[0].pageX - e.currentTarget.offsetLeft
+    const speed = 1
+    const walk = (x - startX) * speed
+    e.currentTarget.scrollLeft = scrollLeft - walk
   }
 
   useEffect(() => {
     function handleUp() {
-      setDown(false);
+      setDown(false)
     }
-    window.addEventListener("mouseup", handleUp);
-    window.addEventListener("dragend", handleUp);
+    window.addEventListener("mouseup", handleUp)
+    window.addEventListener("dragend", handleUp)
     return () => {
-      window.removeEventListener("mouseup", handleUp);
-      window.removeEventListener("dragend", handleUp);
-    };
-  }, []);
+      window.removeEventListener("mouseup", handleUp)
+      window.removeEventListener("dragend", handleUp)
+    }
+  }, [])
   return {
     handleMouseMove,
     handleTouchMove,
     handleMouseDown,
     handleTouchDown,
     wrapperRef,
-  };
+  }
 }
