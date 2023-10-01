@@ -2,7 +2,6 @@
 import { Route, Routes } from "react-router-dom"
 
 /* dependencies */
-import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from "@clerk/clerk-react"
 
 /* pages/hooks/components */
 import { HomePage } from "./pages"
@@ -24,14 +23,7 @@ function App() {
     }
   }, [darkMode])
 
-  if (!import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY) {
-    throw new Error("Missing Publishable Key")
-  }
-
-  const clerkPubKey = import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY ?? ""
-
   return (
-    <ClerkProvider publishableKey={clerkPubKey}>
       <div
         style={{
           backgroundColor: "hsl(var(--background))",
@@ -41,18 +33,12 @@ function App() {
           transition: "all",
           transitionDuration: "300ms",
         }}>
-        <SignedIn>
           <Navbar />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
-        </SignedIn>
-        <SignedOut>
-          <RedirectToSignIn />
-        </SignedOut>
       </div>
-    </ClerkProvider>
   )
 }
 

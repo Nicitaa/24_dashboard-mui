@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from "react-router"
 
-import { useClerk, useUser } from "@clerk/clerk-react"
 import {
   AppBar,
   Button,
@@ -15,32 +14,18 @@ import {
 } from "@mui/material"
 
 import InfoIcon from "@mui/icons-material/Info"
-import LogoutIcon from "@mui/icons-material/Logout"
 
 import HomeIcon from "@mui/icons-material/Home"
 import AssessmentIcon from "@mui/icons-material/Assessment"
 import Person2Icon from "@mui/icons-material/Person2"
-import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded"
-import KeyRoundedIcon from "@mui/icons-material/KeyRounded"
 import useDarkMode from "../store/darkModeStore"
 
 export function Navbar() {
-  const { user } = useUser()
 
   const navigate = useNavigate()
   const location = useLocation()
   const mode = useDarkMode()
-  const { signOut } = useClerk()
 
-  const handleLogout = async () => {
-    try {
-      await signOut()
-      // Handle any additional logout logic or redirection if needed
-    } catch (error) {
-      // Handle error if logout fails
-      console.error("Logout failed:", error)
-    }
-  }
 
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -143,27 +128,7 @@ export function Navbar() {
             onClick={() => navigate("/profile")}>
             Profile
           </Button>
-          {!user && (
-            <Button
-              startIcon={<AccountCircleRoundedIcon />}
-              size="large"
-              color="inherit"
-              sx={{ textTransform: "uppercase" }}
-              onClick={() => navigate("/register")}>
-              Sign up
-            </Button>
-          )}
-          {!user && (
-            <Button
-              startIcon={<KeyRoundedIcon />}
-              size="large"
-              color="inherit"
-              sx={{ textTransform: "uppercase" }}
-              onClick={() => navigate("/login")}>
-              Sign in
-            </Button>
-          )}
-          {user && (
+         
             <Button
               startIcon={<InfoIcon />}
               size="large"
@@ -177,7 +142,7 @@ export function Navbar() {
               onClick={() => navigate("/about-us")}>
               About us
             </Button>
-          )}
+  
         </Stack>
         <Stack direction="row">
           <FormGroup>
@@ -186,9 +151,6 @@ export function Navbar() {
               label=""
             />
           </FormGroup>
-          <Button onClick={handleLogout} endIcon={<LogoutIcon />}>
-            Logout
-          </Button>
         </Stack>
       </Toolbar>
     </AppBar>

@@ -1,15 +1,9 @@
-import { useUser } from "@clerk/clerk-react"
 import { Box, Button, Typography, styled } from "@mui/material"
 import { useNavigate } from "react-router"
 
 export function HomePage() {
   const navigate = useNavigate()
 
-  const { isLoaded, isSignedIn, user } = useUser()
-
-  if (!isLoaded || !isSignedIn) {
-    return null
-  }
 
   const CustomButton = styled(Button)(() => ({
     backgroundColor: "transparent",
@@ -28,7 +22,7 @@ export function HomePage() {
     <Box textAlign="center" sx={{ maxHeight: "calc(100vh - 65px);", overflow: "hidden" }}>
      <Box sx={{display:'flex',flexDirection:'column',alignItems:'center'}}>
        <Typography variant="h4" mt={4}>
-        Welcome {user.firstName}
+        Welcome
       </Typography>
       <Typography variant="subtitle1" color="gray" mb={3}>
         Explore our powerful community with us!
